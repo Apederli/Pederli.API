@@ -53,5 +53,14 @@ namespace Pederli.API.Controllers
             var category = _categoryService.Update(_mapper.Map<Category>(categoryViewModel));
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            //Result sayesinde asenkron çağrıldı, async ve await yerine Result methoduda kullanılabilir. 
+            var category = _categoryService.GetById(id).Result;
+            _categoryService.Delete(category);
+            return NoContent();
+        }
     }
 }
