@@ -1,10 +1,12 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pederli.API.Filters;
 using Pederli.Core.DataAccess.EntityFreamwork;
 using Pederli.Data.Abstract;
 using Pederli.Data.Concrete.EntityFreamwork;
@@ -38,8 +40,13 @@ namespace Pederli.API
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddAutoMapper(typeof(Startup));
 
+            //Service Filter
+            services.AddScoped<NotFoundFilter>();
 
-
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
 
             services.AddDbContext<DatabaseContext>(options =>
             {

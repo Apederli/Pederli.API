@@ -15,6 +15,13 @@ namespace Pederli.API.Mapping
             CreateMap<Category, CategoryViewModel>();
             CreateMap<CategoryViewModel, Category>();
 
+            CreateMap<PersonViewModel, Person>();
+            CreateMap<Person, PersonViewModel>();
+
+
+            CreateMap<Product, ProductViewModel>();
+            CreateMap<ProductViewModel, Product>();
+
         }
     }
 }
